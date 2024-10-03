@@ -5,10 +5,12 @@ import Main from './main';
 import Basket from './basket';
 import Article from './article';
 
-/**
- * Приложение
- * Маршрутизация по страницам и модалкам
- */
+import LoginPage from '../components/loginpage';
+
+import ProfilePage from '../components/profilepage';
+
+
+
 function App() {
   const activeModal = useSelector(state => state.modals.name);
 
@@ -17,6 +19,9 @@ function App() {
       <Routes>
         <Route path={''} element={<Main />} />
         <Route path={'/articles/:id'} element={<Article />} />
+
+        <Route path="/login" element={<LoginPage/>} />
+        <Route path="/profilepage" element={<ProfilePage/>} />
       </Routes>
 
       {activeModal === 'basket' && <Basket />}
