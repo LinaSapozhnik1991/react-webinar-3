@@ -1,9 +1,7 @@
-import React, { useContext, useState } from 'react';
-import {  useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './style.css';
-
 import { useUser } from '../../store/usercontext';
-
 function LoginForm() {
   const { login } = useUser();
   const [username, setUsername] = useState('');
@@ -13,29 +11,34 @@ function LoginForm() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setErrorMessage('');
+
     if (!username || !password) {
       setErrorMessage('Заполните все поля.');
       return;
     }
+
     try {
-      const response = await fetch('/api/v1/users/sign', {
+      const response = await fetch('/api/v1/users/sign/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ login: username, password }),
-});
-if (response.ok) {
+      });
+
+      if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
-        login(username);
-        navigate('/profilepage');
+        login(data.result);
+        navigate('/');
       } else {
         const error = await response.json();
-        setErrorMessage(error.data.message || 'Неизвестная ошибка.');
+        setErrorMessage(error.data?.message || 'Пользователь не найден.');
       }
     } catch (err) {
-      setErrorMessage('Неверный логин или пароль');
+      console.error(err);
+      setErrorMessage('Произошла ошибка. Пожалуйста, попробуйте снова.');
     }
   };
 

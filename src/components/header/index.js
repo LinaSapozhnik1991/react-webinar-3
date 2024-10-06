@@ -1,27 +1,31 @@
-import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { StoreContext } from '../../store/context';
-
+import React from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useUser } from '../../store/usercontext';
+import './style.css';
 function Header() {
-  const store = useContext(StoreContext);
   const navigate = useNavigate();
-  const user = store.state.user;
+  const { user, logout } = useUser();
 
   const handleLogout = () => {
+    logout();
     localStorage.removeItem('token');
-    store.actions.user.clearUser(); // Очистка состояния пользователя
+    navigate('/login');
+  };
+
+  const handleLogin = () => {
     navigate('/login');
   };
 
   return (
-    <header>
+    <header className={'header'}>
       <nav>
-        <Link to="/login">Вход</Link>
-        {user && (
+        {user ? (
           <>
-            <Link to="/profilepage">{'user.name'}</Link>
+            <NavLink to="/profilepage"><span>{user.user.profile.name}</span></NavLink>
             <button onClick={handleLogout}>Выход</button>
           </>
+        ) : (
+          <button onClick={handleLogin}>Вход</button>
         )}
       </nav>
     </header>

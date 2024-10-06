@@ -7,14 +7,16 @@ import Navigation from '../../containers/navigation';
 import SideLayout from '../side-layout';
 import useTranslate from '../../hooks/use-translate';
 import ProfileInfo from '../profileinfo';
-import LogoutButton from '../logoutbutton';
+
+import Header from '../header';
 
 const ProfilePage = () => {
   const { t } = useTranslate();
   return (
     <div>
-        <PageLayout>
-      <LogoutButton/>
+       <PageLayout>
+      <Header/>
+
       <Head title={t('title')} >
         <LocaleSelect/>
         </Head>

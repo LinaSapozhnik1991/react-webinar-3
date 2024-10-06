@@ -1,4 +1,5 @@
-import { memo, useContext } from 'react';
+import { memo, useEffect} from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import useStore from '../../hooks/use-store';
 import useTranslate from '../../hooks/use-translate';
 import useInit from '../../hooks/use-init';
@@ -8,53 +9,33 @@ import Head from '../../components/head';
 import CatalogFilter from '../../containers/catalog-filter';
 import CatalogList from '../../containers/catalog-list';
 import LocaleSelect from '../../containers/locale-select';
-import LoginButton from '../../components/loginbutton';
-import LogoutButton from '../../components/logoutbutton';
 
 import { useUser } from '../../store/usercontext';
-import { useNavigate } from 'react-router-dom';
+import Header from '../../components/header';
+
 
 /**
  * Главная страница - первичная загрузка каталога
  */
 function Main() {
   const store = useStore();
-
-  useInit(
-    () => {
-      store.actions.catalog.initParams();
-    },
-    [],
-    true,
-  );
+  useInit(() => {
+    store.actions.catalog.initParams();
+  }, [], true);
 
   const { t } = useTranslate();
   const { user, logout } = useUser();
   const navigate = useNavigate();
+console.log('user',user)
   const handleLogout = () => {
-    logout(); // Вызываем функцию выхода
-    navigate('/login'); // Перенаправляем на главную страницу или страницу входа
+    logout();
+    navigate('/login');
   };
 
-  console.log('Current user:', user);
+
   return (
     <PageLayout>
-
-         {user ? (
-        <div>
-                 <span
-            style={{ cursor: 'pointer', backgroundcolor: 'blue' }}
-            onClick={() => navigate('/profile')} // Переход на страницу профиля
-          >gryhtyh
-            {user}
-          </span>
-
-          <button onClick={handleLogout}>Выход</button> {/* Кнопка выхода */}
-        </div>
-      ) : (
-        <LoginButton />
-      )}
-
+    <Header />
 
       <Head title={t('title')}>
         <LocaleSelect />

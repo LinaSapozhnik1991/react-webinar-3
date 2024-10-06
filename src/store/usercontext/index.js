@@ -1,18 +1,22 @@
+
 import React, { createContext, useContext, useState } from 'react';
 
+// Создание контекста
 const UserContext = createContext();
 
+// Провайдер для управления состоянием пользователя
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
 
-  const login = (username) => {
-    setUser(username);
+
+  const login = (userData) => {
+    setUser(userData);
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('token'); // Удаляем токен при выходе
+    localStorage.removeItem('token');
   };
 
   return (
@@ -25,3 +29,5 @@ export const UserProvider = ({ children }) => {
 export const useUser = () => {
   return useContext(UserContext);
 };
+
+

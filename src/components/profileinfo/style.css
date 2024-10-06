@@ -1,0 +1,13 @@
+.profile h1{
+  font-size: 34px;
+  padding: 15px;
+}
+.profile p{
+  font-size: 24px;
+  font-weight: 400;
+  padding:8px 15px;
+}
+span{
+  font-weight: bold;
+  padding: 10px;
+}
