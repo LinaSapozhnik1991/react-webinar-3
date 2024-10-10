@@ -9,7 +9,11 @@ import Article from './article';
 import Login from './login';
 import Profile from './profile';
 import Protected from '../containers/protected';
+<<<<<<< HEAD
 import { useSelector as useSelectorRedux } from 'react-redux';
+=======
+import { useDispatch, useSelector as useSelectorRedux } from 'react-redux';
+>>>>>>> lecture-five
 
 /**
  * Приложение

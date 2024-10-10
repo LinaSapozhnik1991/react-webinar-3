@@ -13,6 +13,11 @@ import TopHead from '../../containers/top-head';
 import { useDispatch, useSelector } from 'react-redux';
 import shallowequal from 'shallowequal';
 import articleActions from '../../store-redux/article/actions';
+<<<<<<< HEAD
+=======
+import CommentsSection from '../../components/commentssections';
+import { comments } from '../../store-redux/exports';
+>>>>>>> lecture-five
 
 function Article() {
   const store = useStore();
@@ -31,6 +36,10 @@ function Article() {
     state => ({
       article: state.article.data,
       waiting: state.article.waiting,
+<<<<<<< HEAD
+=======
+      commentsCount: state.comments.comments
+>>>>>>> lecture-five
     }),
     shallowequal,
   ); // Нужно указать функцию для сравнения свойства объекта, так как хуком вернули объект
@@ -51,6 +60,12 @@ function Article() {
       <Navigation />
       <Spinner active={select.waiting}>
         <ArticleCard article={select.article} onAdd={callbacks.addToBasket} t={t} />
+<<<<<<< HEAD
+=======
+
+<h3>Комментарии({select.commentsCount})</h3>
+<CommentsSection productId={params.id}/>
+>>>>>>> lecture-five
       </Spinner>
     </PageLayout>
   );
