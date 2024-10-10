@@ -1,4 +1,5 @@
 import { memo, useCallback } from 'react';
+import { useDispatch, useStore as useStoreRedux } from 'react-redux';
 import useStore from '../../hooks/use-store';
 import useSelector from '../../hooks/use-selector';
 import useInit from '../../hooks/use-init';
@@ -7,12 +8,11 @@ import ItemBasket from '../../components/item-basket';
 import List from '../../components/list';
 import ModalLayout from '../../components/modal-layout';
 import BasketTotal from '../../components/basket-total';
+import modalsActions from '../../store-redux/modals/actions';
 
-/**
- * Корзина в модальном окне
- */
 function Basket() {
   const store = useStore();
+  const dispatch = useDispatch();
 
   const select = useSelector(state => ({
     list: state.basket.list,
@@ -24,7 +24,10 @@ function Basket() {
     // Удаление из корзины
     removeFromBasket: useCallback(_id => store.actions.basket.removeFromBasket(_id), [store]),
     // Закрытие любой модалки
-    closeModal: useCallback(() => store.actions.modals.close(), [store]),
+    closeModal: useCallback(() => {
+      //store.actions.modals.close();
+      dispatch(modalsActions.close());
+    }, [store]),
   };
 
   const { t } = useTranslate();

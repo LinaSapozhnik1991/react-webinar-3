@@ -1,5 +1,4 @@
-import { memo, useEffect} from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { memo } from 'react';
 import useStore from '../../hooks/use-store';
 import useTranslate from '../../hooks/use-translate';
 import useInit from '../../hooks/use-init';
@@ -9,40 +8,32 @@ import Head from '../../components/head';
 import CatalogFilter from '../../containers/catalog-filter';
 import CatalogList from '../../containers/catalog-list';
 import LocaleSelect from '../../containers/locale-select';
+import TopHead from '../../containers/top-head';
+import CommentsSection from '../../components/commentssections';
 
-import { useUser } from '../../store/usercontext';
-import Header from '../../components/header';
-
-
-/**
- * Главная страница - первичная загрузка каталога
- */
 function Main() {
   const store = useStore();
-  useInit(() => {
-    store.actions.catalog.initParams();
-  }, [], true);
+
+  useInit(
+    async () => {
+      await Promise.all([store.actions.catalog.initParams(), store.actions.categories.load()]);
+    },
+    [],
+    true,
+  );
 
   const { t } = useTranslate();
-  const { user, logout } = useUser();
-  const navigate = useNavigate();
-console.log('user',user)
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
-
 
   return (
     <PageLayout>
-    <Header />
-
+      <TopHead />
       <Head title={t('title')}>
         <LocaleSelect />
       </Head>
       <Navigation />
       <CatalogFilter />
       <CatalogList />
+
     </PageLayout>
   );
 }

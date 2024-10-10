@@ -1,16 +1,17 @@
 import { memo, useCallback } from 'react';
-import propTypes from 'prop-types';
-import { numberFormat } from '../../utils';
 import { cn as bem } from '@bem-react/classname';
+import propTypes from 'prop-types';
+import numberFormat from '../../utils/number-format';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './style.css';
 
 function ItemBasket(props) {
+  const { onRemove = () => {}, labelCurr = '₽', labelUnit = 'шт', labelDelete = 'Удалить' } = props;
   const cn = bem('ItemBasket');
 
   const callbacks = {
-    onRemove: e => props.onRemove(props.item._id),
+    onRemove: e => onRemove(props.item._id),
   };
 
   return (
@@ -27,13 +28,13 @@ function ItemBasket(props) {
       </div>
       <div className={cn('right')}>
         <div className={cn('cell')}>
-          {numberFormat(props.item.price)} {props.labelCurr}
+          {numberFormat(props.item.price)} {labelCurr}
         </div>
         <div className={cn('cell')}>
-          {numberFormat(props.item.amount || 0)} {props.labelUnit}
+          {numberFormat(props.item.amount || 0)} {labelUnit}
         </div>
         <div className={cn('cell')}>
-          <button onClick={callbacks.onRemove}>{props.labelDelete}</button>
+          <button onClick={callbacks.onRemove}>{labelDelete}</button>
         </div>
       </div>
     </div>
@@ -53,13 +54,6 @@ ItemBasket.propTypes = {
   labelCurr: PropTypes.string,
   labelDelete: PropTypes.string,
   labelUnit: PropTypes.string,
-};
-
-ItemBasket.defaultProps = {
-  onRemove: () => {},
-  labelCurr: '₽',
-  labelUnit: 'шт',
-  labelDelete: 'Удалить',
 };
 
 export default memo(ItemBasket);

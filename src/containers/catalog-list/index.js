@@ -7,9 +7,7 @@ import List from '../../components/list';
 import Pagination from '../../components/pagination';
 import Spinner from '../../components/spinner';
 
-/**
- * Контейнер списка товаров с пагинацией
- */
+
 function CatalogList() {
   const store = useStore();
 
@@ -28,7 +26,7 @@ function CatalogList() {
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
     // Пагинация
     onPaginate: useCallback(page => store.actions.catalog.setParams({ page }), [store]),
-    // Генератор ссылки для пагинатора
+    // генератор ссылки для пагинатора
     makePaginatorLink: useCallback(
       page => {
         return `?${new URLSearchParams({
@@ -61,6 +59,7 @@ function CatalogList() {
   return (
     <Spinner active={select.waiting}>
       <List list={select.list} renderItem={renders.item} />
+
       <Pagination
         count={select.count}
         page={select.page}

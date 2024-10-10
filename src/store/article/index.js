@@ -1,7 +1,7 @@
 import StoreModule from '../module';
 
 /**
- * Детальная информация о товаре для страницы товара
+ * Детальная ифнормация о товаре для страницы товара
  */
 class ArticleState extends StoreModule {
   initState() {
@@ -24,15 +24,14 @@ class ArticleState extends StoreModule {
     });
 
     try {
-      const response = await fetch(
-        `/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`,
-      );
-      const json = await response.json();
+      const res = await this.services.api.request({
+        url: `/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`,
+      });
 
       // Товар загружен успешно
       this.setState(
         {
-          data: json.result,
+          data: res.data.result,
           waiting: false,
         },
         'Загружен товар из АПИ',

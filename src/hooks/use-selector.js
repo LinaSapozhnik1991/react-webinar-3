@@ -21,7 +21,7 @@ export default function useSelector(selectorFunc) {
   }, []); // Нет зависимостей - исполнится один раз
 
   // Отписка от store при демонтировании компонента
-  useLayoutEffect(() => unsubscribe, [unsubscribe]);
+  useEffect(() => unsubscribe, [unsubscribe]);
 
   return state;
 }
