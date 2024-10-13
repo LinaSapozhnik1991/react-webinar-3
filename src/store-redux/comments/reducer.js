@@ -1,29 +1,29 @@
+
 const initialState = {
-  comments: [],
-  currentComment: null,
-  isAuthorized: false,
+  data: [],
   loading: false,
+  error: null,
 };
-
-export const selectComments = state => state.comments.comments;
-
-export const selectIsAuthorized = state => state.comments.isAuthorized;
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-
-    case 'FETCH_COMMENTS_SUCCESS':
-      return { ...state, comments: action.payload.comments.result.items };
-
- case 'SET_AUTHORIZED':
-      return { ...state, isAuthorized: action.payload };
-
-    case 'ADD_COMMENT_SUCCESS':
-      return { comments: [...state.comments, action.payload], currentComment: state.currentComment };
-
-    case 'SET_CURRENT_COMMENT':
-      return { ...state, currentComment: action.payload };
-
+    case 'comments/fetch-start':
+      return { ...state, loading: true, error: null };
+    case 'comments/fetch-success':
+      return { ...state, loading: false, data: action.payload };
+    case 'comments/fetch-error':
+      return { ...state, loading: false, error: action.error };
+    case 'comments/add-success':
+      return { ...state, data: [...state.data, action.payload] };
+    case 'comments/reply-success':
+      return {
+        ...state,
+        data: state.data.map(comment =>
+          comment._id === action.payload.parent._id
+            ? { ...comment, replies: [...(comment.replies || []), action.payload] }
+            : comment
+        ),
+      };
     default:
       return state;
   }

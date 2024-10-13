@@ -9,10 +9,7 @@ import CatalogFilter from '../../containers/catalog-filter';
 import CatalogList from '../../containers/catalog-list';
 import LocaleSelect from '../../containers/locale-select';
 import TopHead from '../../containers/top-head';
-<<<<<<< HEAD
-=======
-import CommentsSection from '../../components/commentssections';
->>>>>>> lecture-five
+
 
 function Main() {
   const store = useStore();
@@ -36,10 +33,6 @@ function Main() {
       <Navigation />
       <CatalogFilter />
       <CatalogList />
-<<<<<<< HEAD
-=======
-
->>>>>>> lecture-five
     </PageLayout>
   );
 }

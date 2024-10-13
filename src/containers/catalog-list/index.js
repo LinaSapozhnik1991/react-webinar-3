@@ -7,10 +7,6 @@ import List from '../../components/list';
 import Pagination from '../../components/pagination';
 import Spinner from '../../components/spinner';
 
-<<<<<<< HEAD
-=======
-
->>>>>>> lecture-five
 function CatalogList() {
   const store = useStore();
 
@@ -62,10 +58,6 @@ function CatalogList() {
   return (
     <Spinner active={select.waiting}>
       <List list={select.list} renderItem={renders.item} />
-<<<<<<< HEAD
-=======
-
->>>>>>> lecture-five
       <Pagination
         count={select.count}
         page={select.page}

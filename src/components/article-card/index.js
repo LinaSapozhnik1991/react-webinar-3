@@ -4,10 +4,6 @@ import { cn as bem } from '@bem-react/classname';
 import numberFormat from '../../utils/number-format';
 import './style.css';
 
-<<<<<<< HEAD
-=======
-
->>>>>>> lecture-five
 function ArticleCard(props) {
   const { article, onAdd = () => {}, t = text => text } = props;
   const cn = bem('ArticleCard');
@@ -33,10 +29,6 @@ function ArticleCard(props) {
         <div className={cn('value')}>{numberFormat(article.price)} ₽</div>
       </div>
       <button onClick={() => onAdd(article._id)}>{t('article.add')}</button>
-<<<<<<< HEAD
-=======
-
->>>>>>> lecture-five
     </div>
   );
 }

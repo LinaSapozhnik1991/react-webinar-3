@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import useSelector from '../hooks/use-selector';
+
 import useStore from '../hooks/use-store';
 import useInit from '../hooks/use-init';
 import Main from './main';
@@ -9,11 +9,8 @@ import Article from './article';
 import Login from './login';
 import Profile from './profile';
 import Protected from '../containers/protected';
-<<<<<<< HEAD
 import { useSelector as useSelectorRedux } from 'react-redux';
-=======
-import { useDispatch, useSelector as useSelectorRedux } from 'react-redux';
->>>>>>> lecture-five
+import Comments from '../components/comments';
 
 /**
  * Приложение
@@ -32,6 +29,7 @@ function App() {
       <Routes>
         <Route path={''} element={<Main />} />
         <Route path={'/articles/:id'} element={<Article />} />
+        <Route path={'/comments/:productId'} element ={<Comments/>}/>
         <Route path={'/login'} element={<Login />} />
         <Route
           path={'/profile'}
