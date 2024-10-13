@@ -11,7 +11,7 @@ const Comments = () => {
   const [newComment, setNewComment] = useState('');
   const [replyTo, setReplyTo] = useState(null);
   const [replyText, setReplyText] = useState('');
-debugger
+
   const select = useSelector(state => ({
     comments: state.comments.data,
    // isAuthenticated: !!state.session.token,

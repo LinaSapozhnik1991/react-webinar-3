@@ -18,7 +18,7 @@ function CommentsText(props) {
 
   return (
     <div>
-      {isAuthenticated ? (
+      {!isAuthenticated ? (
         <p>Войдите, чтобы иметь возможность комментировать</p>
       ) : (
         <>
